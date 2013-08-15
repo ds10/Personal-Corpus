@@ -12,18 +12,25 @@ $db = new PDO('mysql:host=localhost;dbname=personalcorpus;charset=utf8', 'KingKo
 //2)
 
 $row = 1;
-if (($handle = fopen("tweets.csv", "r")) !== FALSE) {
+if (($handle = fopen("markblog.csv", "r")) !== FALSE) {
     while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-    	print_r($data);
+    	//print_r($data);
         $num = count($data);
         echo "<p> $num fields in line $row: <br /></p>\n";
         $row++;
        
-          $query = "INSERT INTO store(store, site, date) VALUES('$data[7]', 'twitter','$data[5]')";
-          print $query;
-          $result = $db->exec($query);
-		  print $result;
-          print  $db->lastInsertId();
+          
+           for ($c=0; $c < $num; $c++) {
+             $idata = $db->quote($data[$c]);
+            // echo $data[$c] . "<br />\n";
+            
+            $query = "INSERT INTO store(store) VALUES($idata)";
+            // print $query;
+             $result = $db->exec($query);
+		//  //print $result;
+         // print  $db->lastInsertId();
+       		}
+          
     }
     fclose($handle);
 }
