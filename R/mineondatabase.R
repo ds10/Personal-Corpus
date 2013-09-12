@@ -1,6 +1,3 @@
-library(RMySQL)
-library(tm)
-#will need ln -s /Applications/MAMP/tmp/mysql.sock /tmp/mysql.sock
 mydb = dbConnect(MySQL(), user='KingKongRoot', password='CarBoot', dbname='personalcorpus', host='localhost')
 query<-paste('SELECT store,site,date FROM store')
 data.frame = dbGetQuery(mydb,query)
