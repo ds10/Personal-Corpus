@@ -1,4 +1,3 @@
-
 library(twitteR)
 library(ROAuth)
 library(RCurl)
@@ -19,8 +18,7 @@ twitCred <- OAuthFactory$new(consumerKey=consumerKey,
 #              destfile="cacert.pem")
 
 twitCred$handshake()
-
-#registerTwitterOAuth(twitCred)
+registerTwitterOAuth(twitCred)
 
 # so the OAuth bit appears to be ok...
 #
@@ -28,6 +26,7 @@ twitCred$handshake()
 #save(list="twitCred", file="twitteR_credentials")
 # works, in future I can just
 load("twitteR_credentials")
+twitCred$handshake()
 registerTwitterOAuth(twitCred)
 me <- getUser("paddytherabbit")
 userTimeline<-userTimeline(me, 3200)

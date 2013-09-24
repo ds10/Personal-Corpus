@@ -2,52 +2,46 @@
 #2)Windows users may have to compile rmysql from source
 #3)If you use a self contained MAMP style thing you will need something along the lines of ln -s /Applications/MAMP/tmp/mysql/mysql.sock /tmp/mysql.sock
 #4)You will need to stick your twitter API key in the tweet search in functions.R
-
-#set the following true or false, if true then set options too:
+#5)set the following true or false, if true then set options too
 
 reddit <- TRUE
+youtube <- FALSE
+twitter <- FALSE
+blog <- FALSE
 
-if (reddit == TRUE){
+setwd("~/Desktop/RStudio/Personal Corpus/R")
+source("settings.R")
+source("aquire.R")
+source("functions.R")
+
+if (blog == TRUE){
+  #blog 
+  source("blog_wordpress_mysql.R")
+  source("blog_basic_analysis.R")
+  source("blog_dendrogram.R")
+  mostusedterms <- rownames(mydata.df)
+  source("relatedtopicsapi.R")
+  source("minerelated.R")
+  source("blog_topicmodels.R")
+  source("blog_text_similarity.R")
+}
+
+if (twitter == TRUE){
   
-  #really we should just ask for usernames and then get the subreddits via reddit API
-   subreds<-c("ukpolitics","funny")
+  twitterMap("paddytherabbit", fileName="paddytherabbit.pdf", nMax=1500)
+  source("twitter_authentication.R")
+  source("twitter_topics.R")
+  source("twitter_termfrequency.R")
+  source("twitter_map.R")
 }
 
 
-#Prereqs:
-library(rjson)
-library(foreach)
-library(RMySQL)
-library(tm)
-library(RCurl)
-library(twitteR)
-require(topicmodels)
-require(mallet)
+if (reddit == TRUE){
+  generatereddittopics(subreds,"year")
+}
 
-require(rJava) # needed for stemming function 
-library(Snowball) # also needed for stemming function 
-require(pvclust)
+if (youtube == TRUE){
+  #run the 
+}
 
 
-#you need do the  the following before starting:
-
-#
-
-
-#natch
-source("functions.R")
-
-generatereddittopics(subreds,"year")
-
-#This script it reading from MySQL. It finds how many times the most used words in 
-#doucments and how many times they were used. 
-source("mineondatabase.R")
-source("mineontwitter.R")
-
-mostusedterms <- rownames(mydata.df)
-
-#This script it taking your topic and generating related topics.
-source("relatedtopicsapi.R")
-
-#this is to mine the related topics
-source("minerelated.R")

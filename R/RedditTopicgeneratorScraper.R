@@ -18,7 +18,7 @@
 # 7. Return a word frequency table
 
 
-redditScrape <- function(subred = c('nameOfSubred', 'allTop'), time = c('day', 'week', 'month', 'year'), plotCloud = TRUE, saveText = TRUE, myDirectory = "/Users/David/Desktop/RStudio/Personal Corpus/R") {
+redditScrape <- function(subreds , time = c('day', 'week', 'month', 'year'), plotCloud = TRUE, saveText = TRUE, myDirectory = "/Users/David/Desktop/RStudio/Personal Corpus/R") {
   
   
   #######################################################
@@ -28,6 +28,7 @@ redditScrape <- function(subred = c('nameOfSubred', 'allTop'), time = c('day', '
   require(RCurl)
   require(RColorBrewer) 
   require(wordcloud)
+  require(foreach)
   
   if (length(time) > 1) { 
     cat("Choose a single timeframe (e.g., day, week, month, or year) \n")
@@ -36,6 +37,8 @@ redditScrape <- function(subred = c('nameOfSubred', 'allTop'), time = c('day', '
   
   #######################################################
   # 1. Make the url, get the page. 
+[
+foreach subreds as ]
   
   if (subred == 'allTop') {
     url <- paste('http://www.reddit.com/top/?sort=top&t=', time, sep = "")

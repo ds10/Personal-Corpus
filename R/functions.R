@@ -203,6 +203,31 @@ foreach (subred=subreds) %do% {
     queryresult = dbGetQuery(mydb,query)
     dbDisconnect(mydb)
   }
-  
  }
 }
+
+
+youtubecomments<-function(urls){
+  apikey<-'AIzaSyBLoKfmOALdgzS-Irqwj79v5NyamSWfAhw'
+  urls<-c("http://www.youtube.com/watch?v=1VuMdLm0ccU",
+          "http://www.youtube.com/watch?v=NU91V2dlvz4"
+  )
+  
+  require(foreach) 
+  
+  foreach(url=urls) %do% {
+     doc <- htmlParse(url)
+     
+     #get the comments and do stuff with them see reddit function
+     
+     
+  }
+  
+} 
+
+
+
+generatetwittertopics<-function(username , plotCloud = TRUE, saveText = TRUE, myDirectory = "/Users/David/Desktop/RStudio/Personal Corpus/R"){
+  
+  
+}  
